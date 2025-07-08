@@ -12,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
     'movie' => Movie::class,
     'series' => Series::class,
     'videogame' => VideoGame::class,
+    'episode' => Episode::class,
 ])]
 abstract class EntertainmentMedia
 {
@@ -23,7 +24,7 @@ abstract class EntertainmentMedia
     #[ORM\Column(length: 255)]
     protected ?string $title = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
+    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: false)]
     protected ?\DateTimeInterface $date = null;
 
     public function getId(): ?int

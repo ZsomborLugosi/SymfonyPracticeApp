@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Episode;
 use App\Entity\Movie;
 use App\Entity\Series;
 use App\Entity\VideoGame;
@@ -32,5 +33,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Video Games', 'fas fa-gamepad', VideoGame::class);
         yield MenuItem::linkToCrud('Movies', 'fas fa-film', Movie::class);
         yield MenuItem::linkToCrud('Series', 'fas fa-tv', Series::class);
+        yield MenuItem::linkToCrud('Episodes', 'fas fa-play-circle', Episode::class);
     }
 }

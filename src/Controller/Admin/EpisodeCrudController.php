@@ -2,18 +2,19 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Movie;
+use App\Entity\Episode;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
-class MovieCrudController extends AbstractCrudController
+class EpisodeCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return Movie::class;
+        return Episode::class;
     }
 
     public function configureFields(string $pageName): iterable
@@ -21,13 +22,13 @@ class MovieCrudController extends AbstractCrudController
         return [
             IdField::new('id')->hideOnForm(),
             TextField::new('title'),
-            TextField::new('director'),
-            TextField::new('streamingPlatform'),
+            AssociationField::new('series')
+                ->setRequired(true)
+                ->setHelp('Select the series this episode belongs to'),
             DateField::new('date'),
-            AssociationField::new('sequel')
-                ->setHelp('Select the sequel movie'),
-            AssociationField::new('prequel')
-                ->setHelp('Select the prequel movie'),
+            NumberField::new('rating')
+                ->setNumDecimals(1)
+                ->setHelp('Rating between 0 and 10'),
         ];
     }
 }
