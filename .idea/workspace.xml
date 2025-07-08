@@ -6,15 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="3e6bc63f-51e1-4770-831d-51ec17c29e9b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/Version20250707134423.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/Version20250708083403.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Admin/DashboardController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Admin/DashboardController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Admin/MovieCrudController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Admin/MovieCrudController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/EntertainmentMedia.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/EntertainmentMedia.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Episode.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Episode.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/Movie.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Movie.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Series.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Series.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/VideoGame.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/VideoGame.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -220,7 +212,7 @@
       <updated>1751892123870</updated>
       <workItem from="1751892124975" duration="159000" />
       <workItem from="1751892352502" duration="3568000" />
-      <workItem from="1751895931909" duration="13740000" />
+      <workItem from="1751895931909" duration="14433000" />
     </task>
     <servers />
   </component>
