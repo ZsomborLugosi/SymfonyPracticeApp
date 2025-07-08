@@ -6,7 +6,7 @@ use App\Repository\MovieRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: MovieRepository::class)]
-#[ORM\HasLifecycleCallbacks] // Erre továbbra is szükség van!
+#[ORM\HasLifecycleCallbacks]
 class Movie extends EntertainmentMedia
 {
     #[ORM\Column(length: 255)]
@@ -15,34 +15,15 @@ class Movie extends EntertainmentMedia
     #[ORM\Column(length: 255)]
     private ?string $streamingPlatform = null;
 
-    // A 'cascade' és 'orphanRemoval' opciók eltávolítva!
-    #[ORM\OneToOne(targetEntity: self::class)]
-    #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')] // onDelete hozzáadva
+
+    #[ORM\OneToOne(targetEntity: self::class,orphanRemoval: true)]
+    #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
     private ?self $sequel = null;
 
-    // A 'cascade' és 'orphanRemoval' opciók eltávolítva!
-    #[ORM\OneToOne(targetEntity: self::class)]
-    #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')] // onDelete hozzáadva
+
+    #[ORM\OneToOne(targetEntity: self::class,orphanRemoval: true)]
+    #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
     private ?self $prequel = null;
-
-    /**
-     * Törlés előtt megszakítja a hivatkozásokat a kapcsolódó entitásokon.
-     * Ez a metódus biztosítja, hogy a másik film ne hivatkozzon
-     * egy nem létező (közben törölt) filmre.
-     */
-    #[ORM\PreRemove]
-    public function removePrequelAndSequelLinks(): void
-    {
-        if ($this->sequel !== null) {
-            $this->sequel->setPrequel(null);
-        }
-
-        if ($this->prequel !== null) {
-            $this->prequel->setSequel(null);
-        }
-    }
-
-    // ... a többi getter és setter metódus változatlan ...
 
     public function getDirector(): ?string
     {

@@ -18,16 +18,22 @@ class MovieCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
-        return [
-            IdField::new('id')->hideOnForm(),
-            TextField::new('title'),
-            TextField::new('director'),
-            TextField::new('streamingPlatform'),
-            DateField::new('date'),
-            AssociationField::new('sequel')
-                ->setHelp('Select the sequel movie'),
-            AssociationField::new('prequel')
-                ->setHelp('Select the prequel movie'),
-        ];
+        yield IdField::new('id')->hideOnForm();
+        yield TextField::new('title', 'Title');
+        yield TextField::new('director', 'Director');
+        yield TextField::new('streamingPlatform', 'Streaming Platform');
+        yield DateField::new('date', 'Date');
+
+        yield AssociationField::new('sequel', 'Sequel')
+            ->setHelp('Select the sequel of this movie')
+            ->formatValue(function ($value, $entity) {
+                return $entity->getSequel() ? $entity->getSequel()->getTitle() : 'Nincs';
+            });
+
+        yield AssociationField::new('prequel', 'Prequel')
+            ->setHelp('Select the prequel of this movie')
+            ->formatValue(function ($value, $entity) {
+                return $entity->getPrequel() ? $entity->getPrequel()->getTitle() : 'None';
+            });
     }
 }
