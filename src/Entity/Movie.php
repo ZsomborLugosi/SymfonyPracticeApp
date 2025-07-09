@@ -15,13 +15,13 @@ class Movie extends EntertainmentMedia
     #[ORM\Column(length: 255)]
     private ?string $streamingPlatform = null;
 
-
-    #[ORM\OneToOne(targetEntity: self::class,orphanRemoval: true)]
+    // Sequel kapcsolat - ha ezt a filmet törlik, a sequel sequel_id mezője NULL lesz
+    #[ORM\OneToOne(targetEntity: self::class)]
     #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
     private ?self $sequel = null;
 
-
-    #[ORM\OneToOne(targetEntity: self::class,orphanRemoval: true)]
+    // Prequel kapcsolat - ha ezt a filmet törlik, a prequel prequel_id mezője NULL lesz
+    #[ORM\OneToOne(targetEntity: self::class)]
     #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
     private ?self $prequel = null;
 
@@ -67,6 +67,24 @@ class Movie extends EntertainmentMedia
     {
         $this->prequel = $prequel;
         return $this;
+    }
+
+    /**
+     * Lifecycle callback - ez fut le a film törlése előtt
+     * Automatikusan NULL-ra állítja azokat a filmeket, amelyeknek ez a film a sequel-je vagy prequel-je
+     */
+    #[ORM\PreRemove]
+    public function onPreRemove(): void
+    {
+        // Ha van sequel, annak a prequel-jét NULL-ra állítjuk
+        if ($this->sequel) {
+            $this->sequel->setPrequel(null);
+        }
+
+        // Ha van prequel, annak a sequel-jét NULL-ra állítjuk
+        if ($this->prequel) {
+            $this->prequel->setSequel(null);
+        }
     }
 
     public function __toString(): string
